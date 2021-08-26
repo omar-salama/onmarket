@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "hattie.db.elephantsql.com",
+  "port": 5432,
+  "username": "soguajow",
+  "password": "ZpoYG-EvoPt7I3DqN0Ru6_v03nQS3XEL",
+  "database": "soguajow",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true
+}
