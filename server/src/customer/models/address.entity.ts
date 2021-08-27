@@ -3,14 +3,11 @@ import { CustomerEntity } from './customer.entity';
 
 @Entity('address')
 export class AddressEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column({ nullable: true })
-  address1: string;
-
-  @Column({ nullable: true })
-  address2: string;
+  @Column()
+  address: string;
 
   @ManyToOne(
     () => CustomerEntity,

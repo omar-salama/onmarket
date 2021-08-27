@@ -16,7 +16,7 @@ export class CustomerService {
     return customer;
   }
 
-  async getUser(id: number) {
+  async getUser(id: string) {
     const customer = await this.customerRepo.findOne(id, {
       relations: ['addresses'],
     });
