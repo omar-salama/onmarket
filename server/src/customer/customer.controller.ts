@@ -11,7 +11,7 @@ export class CustomerController {
   }
 
   @Get(':id')
-  getOne(@Param('id') id: number) {
+  getOne(@Param('id') id: string) {
     return this.customerService.getUser(id);
   }
 }
