@@ -1,5 +1,5 @@
 export interface Order {
-  id: string;
+  id: number;
   items: string;
   total: number;
   storeName: string;

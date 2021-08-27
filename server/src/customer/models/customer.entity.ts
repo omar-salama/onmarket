@@ -3,8 +3,8 @@ import { AddressEntity } from './address.entity';
 
 @Entity('customer')
 export class CustomerEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   name: string;
