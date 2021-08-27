@@ -22,4 +22,11 @@ export class CustomerService {
     });
     return customer;
   }
+
+  async getUserAddresses(id: string) {
+    const customer = await this.customerRepo.findOne(id, {
+      relations: ['addresses'],
+    });
+    return customer.addresses;
+  }
 }
