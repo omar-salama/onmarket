@@ -16,17 +16,10 @@ export class CustomerService {
     return customer;
   }
 
-  async getUser(id: string) {
+  async getUser(id: number) {
     const customer = await this.customerRepo.findOne(id, {
       relations: ['addresses'],
     });
     return customer;
-  }
-
-  async getUserAddresses(id: string) {
-    const customer = await this.customerRepo.findOne(id, {
-      relations: ['addresses'],
-    });
-    return customer.addresses;
   }
 }
