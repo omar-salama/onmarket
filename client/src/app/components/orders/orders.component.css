@@ -1,10 +1,8 @@
-/* td {
-  font-weight: bold;
+th,
+td {
+  font-size: 18px;
 }
+
 th {
-  font-size: 20px;
-  font-weight: bold;
+  color: #2e86ab;
 }
-table {
-  margin-top: 75px;
-} */
