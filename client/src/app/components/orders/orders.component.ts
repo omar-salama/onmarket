@@ -1,43 +1,34 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-// import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-// import { OrderService } from 'src/app/services/order.service';
-
+import { OrdersService } from 'src/services/orders.service';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
 })
-export class OrdersComponent implements OnInit {
-  // orders: any;
-  // cstOrder: any;
-  // eve!: Subscription;
+export class OrdersComponent implements OnInit, OnDestroy {
+  orders: any;
+  eve!: Subscription;
 
-
-  constructor() {}
+  constructor(private orderService: OrdersService) {}
 
   ngOnInit(): void {
-    // this.getOrders();
+    this.getAllOrders();
   }
 
-  // getOrders() {
-  //   this.orderService.getOrders(this.page).subscribe(
-  //     (res) => {
-  //       this.orders = res.orders;
-  //       this.totalPages = res.totalPages;
-  //     },
-  //     (err) => {
-  //       this.if_error(err);
-  //     }
-  //   );
-  // }
+  getAllOrders() {
+    this.eve = this.orderService.getAllOrders().subscribe(
+      (res) => {
+        console.log(res);
+        this.orders = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
-  // if_error(err: any) {
-  //   this.binding.changeLoading(false);
-  //   this.tostr.error(err, 'Error', { positionClass: 'toast-top-center' });
-  // }
-
-  // ngOnDestroy(): void {
-  //   if (this.eve != undefined) this.eve.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.eve.unsubscribe();
+  }
 }

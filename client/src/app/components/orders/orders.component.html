@@ -10,11 +10,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>ORDER ID</td>
-          <td>CUSTOMER NAME</td>
-          <td>ADDRESS</td>
-          <td>TOTAL</td>
+        <tr *ngFor="let order of orders">
+          <td>{{order.id}}</td>
+          <td>NAME</td>
+          <td>{{order.customerAddress}}</td>
+          <td>{{order.total}}</td>
         </tr>
       </tbody>
     </table>
