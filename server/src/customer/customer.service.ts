@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from './models/customer.interface';
@@ -20,6 +20,9 @@ export class CustomerService {
     const customer = await this.customerRepo.findOne(id, {
       relations: ['addresses'],
     });
+    if (!customer) {
+      throw new HttpException('Customer not found.', HttpStatus.NOT_FOUND);
+    }
     return customer;
   }
 
@@ -30,6 +33,9 @@ export class CustomerService {
       .select(['customer.id', 'addresses.address'])
       .where('customer.id = :id', { id: id })
       .getOne();
+    if (!addresses) {
+      throw new HttpException('Addresses not found.', HttpStatus.NOT_FOUND);
+    }
     return addresses.addresses;
   }
 }
