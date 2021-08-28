@@ -18,7 +18,7 @@ export class OrdersService {
   // Parse the selected address index to the function
   async getCustomerAddress(selectedAddressIndex: number) {
     const listOfAddresses: any = await this.customerService.getUserAddresses(
-      '9a87effa-f424-47a9-bc7a-30b8cb49faca',
+      'e3c45fa4-a4f0-4eef-a02b-082f403626d2',
     );
     return listOfAddresses[selectedAddressIndex].address;
   }
@@ -30,9 +30,14 @@ export class OrdersService {
       ...order,
       total: totalOrderPrice,
       customerAddress: customerAddress,
+      customer: 'e3c45fa4-a4f0-4eef-a02b-082f403626d2',
     });
-
     const savedOrder = await this.orderRepo.save(newOrder);
     return savedOrder;
+  }
+
+  async getOrders() {
+    const orders = await this.orderRepo.find();
+    return orders;
   }
 }
