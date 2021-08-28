@@ -24,9 +24,12 @@ export class CustomerService {
   }
 
   async getUserAddresses(id: string) {
-    const customer = await this.customerRepo.findOne(id, {
-      relations: ['addresses'],
-    });
-    return customer.addresses;
+    const addresses = await this.customerRepo
+      .createQueryBuilder('customer')
+      .leftJoinAndSelect('customer.addresses', 'addresses')
+      .select(['customer.id', 'addresses.address'])
+      .where('customer.id = :id', { id: id })
+      .getOne();
+    return addresses.addresses;
   }
 }
