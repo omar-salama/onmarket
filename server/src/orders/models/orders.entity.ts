@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-// import { CustomerEntity } from '../../customer/models/customer.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { CustomerEntity } from '../../customer/models/customer.entity';
 
 @Entity('orders')
 export class OrdersEntity {
@@ -17,4 +17,7 @@ export class OrdersEntity {
 
   @Column()
   customerAddress: string;
+
+  @ManyToOne(() => CustomerEntity, (customer: CustomerEntity) => customer.id)
+  customer: string;
 }
