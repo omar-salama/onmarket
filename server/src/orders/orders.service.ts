@@ -18,26 +18,30 @@ export class OrdersService {
   // Parse the selected address index to the function
   async getCustomerAddress(selectedAddressIndex: number) {
     const listOfAddresses: any = await this.customerService.getUserAddresses(
-      'e3c45fa4-a4f0-4eef-a02b-082f403626d2',
+      'ec70abf6-beb5-4eca-97e2-b4235be0f439',
     );
     return listOfAddresses[selectedAddressIndex].address;
   }
 
   async createOrder(order: Order) {
     const totalOrderPrice = getTotalPrice(order);
-    const customerAddress = await this.getCustomerAddress(0);
+    const customerAddress = await this.getCustomerAddress(1);
     const newOrder = await this.orderRepo.create({
       ...order,
       total: totalOrderPrice,
       customerAddress: customerAddress,
-      customer: 'e3c45fa4-a4f0-4eef-a02b-082f403626d2',
+      customer: 'ec70abf6-beb5-4eca-97e2-b4235be0f439',
     });
     const savedOrder = await this.orderRepo.save(newOrder);
     return savedOrder;
   }
 
   async getOrders() {
-    const orders = await this.orderRepo.find();
+    const orders = await this.orderRepo
+      .createQueryBuilder('orders')
+      .leftJoinAndSelect('orders.customer', 'customer')
+      .select(['orders', 'customer.name'])
+      .getMany();
     return orders;
   }
 }

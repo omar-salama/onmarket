@@ -12,7 +12,7 @@
       <tbody>
         <tr *ngFor="let order of orders">
           <td>{{order.id}}</td>
-          <td>NAME</td>
+          <td>{{order.customer.name}}</td>
           <td>{{order.customerAddress}}</td>
           <td>{{order.total}}</td>
         </tr>
